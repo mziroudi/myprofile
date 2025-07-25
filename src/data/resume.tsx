@@ -272,7 +272,7 @@ export const DATA = {
       links: [
         {
           title: "GitHub",
-          icon: Icons.github,
+          icon: <Icons.github className="size-4" />,
           href: "https://github.com/mziroudi/Annotation",
         },
       ],
