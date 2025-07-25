@@ -15,7 +15,7 @@ interface Props {
   }[];
 }
 
-export function HackathonCard({
+function HackathonCard({
   title,
   description,
   dates,
@@ -50,7 +50,7 @@ export function HackathonCard({
           {links?.map((link, idx) => (
             <Link href={link.href} key={idx}>
               <Badge key={idx} title={link.title} className="flex gap-2">
-                <link.icon className="size-4" />
+                {link.icon}
                 {link.title}
               </Badge>
             </Link>
