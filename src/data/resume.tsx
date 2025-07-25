@@ -153,7 +153,24 @@ export const DATA = {
     },
   ],
   projects: [
-    
+    {
+      title: "AMF - Moroccan Athletics Federation Platform",
+      href: "#",
+      dates: "2023",
+      active: true,
+      description:
+        "Led the digital transformation for Morocco's national athletics federation, creating a comprehensive platform for event management, athlete tracking, and fan engagement. The project focused on scalability to handle national-level sports data and real-time updates.",
+      technologies: [
+        "Wordpress",
+        "PHP",
+        "JavaScript",
+        "Sports Tech",
+        "Data Management",
+      ],
+      links: [],  // Assuming no link provided; adjust if needed
+      image: "",
+      video: "",
+    },
     {
       title: "MedicPro - Prosthetics & Orthopedic Solutions Platform",
       href: "#",
@@ -186,7 +203,7 @@ export const DATA = {
         "Brand Strategy",
         "Luxury UX",
       ],
-      links: ["https://primolegno.ma/"],
+      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://primolegno.ma/" }],
       image: "",
       video: "",
     },
@@ -204,7 +221,7 @@ export const DATA = {
         "JavaScript",
         "E-commerce Strategy",
       ],
-      links: ["https://darnjara.ma/"],
+      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://darnjara.ma/" }],
       image: "",
       video: "",
     },
@@ -221,7 +238,7 @@ export const DATA = {
         "UI/UX Design",
         "SEO",
       ],
-      links: ["https://hssmaroc.com/"],
+      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://hssmaroc.com/" }],
       image: "",
       video: "",
     },
@@ -239,7 +256,7 @@ export const DATA = {
         "Community Management",
         "Content Strategy",
       ],
-      links: ["https://touargaclub.ma/"],
+      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://touargaclub.ma/" }],
       image: "",
       video: "",
     },
