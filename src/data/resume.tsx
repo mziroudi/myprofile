@@ -8,7 +8,7 @@ export const DATA = {
   location: "Casablanca, Morocco",
   locationLink: "https://www.google.com/maps/search/Casablanca,+Morocco",
   description:
-    "Product Designer and Computer Engineer with 7+ years experience leading high-performance teams. Expert in UX design, AI technologies, and data pipelines using Figma, Miro, and Adobe CS. Proven track record of elevating user experiences and product performance, Passionate about creating innovative solutions that drive progress.",
+    "",
   summary:
     "Product Designer and Computer Engineer with 7+ years experience leading high-performance teams. Expert in UX design, AI technologies, and data pipelines using Figma, Miro, and Adobe CS. Proven track record of elevating user experiences and product performance, Passionate about creating innovative solutions that drive progress.",
   avatarUrl: "/me.jpg",
@@ -96,7 +96,7 @@ export const DATA = {
   },
 
   work: [
-  
+
     {
       company: "Evermore Digital",
       href: "", // No website provided
@@ -154,30 +154,34 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "AMF - Moroccan Athletics Federation Platform",
-      href: "#",
+      title: "Art's Clinic - Healthcare & Aesthetic Medicine Platform",
+      href: "https://artsclinic.com/",
       dates: "2023",
       active: true,
-      description:
-        "Led the digital transformation for Morocco's national athletics federation, creating a comprehensive platform for event management, athlete tracking, and fan engagement. The project focused on scalability to handle national-level sports data and real-time updates.",
+      description: "Designed and developed a sophisticated healthcare platform for a leading aesthetic medicine clinic. The project focused on creating a trustworthy, professional digital presence that showcases medical services, builds patient confidence, and streamlines appointment booking for aesthetic treatments and consultations.",
       technologies: [
         "Wordpress",
         "PHP",
         "JavaScript",
-        "Sports Tech",
-        "Data Management",
+        "Healthcare Design",
+        "UX/UI",
       ],
-      links: [],  // Assuming no link provided; adjust if needed
+      links: [
+        {
+          title: "Website",
+          href: "https://artsclinic.com/",
+          icon: Icons.globe
+        }
+      ],
       image: "",
-      video: "",
+      video: ""
     },
     {
       title: "MedicPro - Prosthetics & Orthopedic Solutions Platform",
       href: "#",
       dates: "Jan 2024 - Present",
       active: true,
-      description:
-        "Designed an empathy-driven, accessible healthcare platform for a leading provider of prosthetics and orthotics. The project prioritized patient education, trust-building, and WCAG compliance to support individuals with disabilities and their families through a sensitive healthcare journey.",
+      description: "Designed an empathy-driven, accessible healthcare platform for a leading provider of prosthetics and orthotics. The project prioritized patient education, trust-building, and WCAG compliance to support individuals with disabilities and their families through a sensitive healthcare journey.",
       technologies: [
         "Figma",
         "Miro",
@@ -185,9 +189,15 @@ export const DATA = {
         "User Research",
         "Healthcare Design",
       ],
-      links: [],
+      links: [
+        {
+          title: "GitHub",
+          href: "#",
+          icon: Icons.github
+        }
+      ],
       image: "",
-      video: "",
+      video: ""
     },
     {
       title: "Primolegno.ma - Premium Architectural Interior Design Platform",
@@ -203,7 +213,7 @@ export const DATA = {
         "Brand Strategy",
         "Luxury UX",
       ],
-      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://primolegno.ma/" }],
+      links: [{ icon: Icons.globe, type: "Website", href: "https://primolegno.ma/" }],
       image: "",
       video: "",
     },
@@ -221,7 +231,7 @@ export const DATA = {
         "JavaScript",
         "E-commerce Strategy",
       ],
-      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://darnjara.ma/" }],
+      links: [{ icon: Icons.globe, type: "Website", href: "https://darnjara.ma/" }],
       image: "",
       video: "",
     },
@@ -238,7 +248,7 @@ export const DATA = {
         "UI/UX Design",
         "SEO",
       ],
-      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://hssmaroc.com/" }],
+      links: [{ icon: Icons.globe, type: "Website", href: "https://hssmaroc.com/" }],
       image: "",
       video: "",
     },
@@ -256,26 +266,24 @@ export const DATA = {
         "Community Management",
         "Content Strategy",
       ],
-      links: [{ icon: <Icons.globe className="size-3" />, type: "Website", href: "https://touargaclub.ma/" }],
+      links: [{ icon: Icons.globe, type: "Website", href: "https://touargaclub.ma/" }],
       image: "",
       video: "",
     },
   ],
-    hackathons: [
+  hackathons: [
     {
-      title: "Annotation",
-      dates: "2024",
-      location: "",
-      description:
-        "This project is a boilerplate for a FastAPI-based Software-as-a-Service (SaaS) application focused on document processing. It provides a foundational structure including user authentication, API routing, database integration, Docker setup for development and deployment, basic monitoring with Prometheus, and a CI pipeline with GitHub Actions. The core idea is to offer a scalable and maintainable starting point for building more complex document processing services, where users can upload documents, have them processed, and manage their accounts and subscriptions. Current document processing and billing functionalities are placeholders, intended to be replaced with actual business logic.",
-      image: "",
+      title: "Thyroid Classification in PyTorch",
+      description: "Deep learning project for thyroid disease classification using PyTorch. Implemented neural network models to accurately classify thyroid conditions from medical data, demonstrating expertise in AI/ML applications for healthcare diagnostics.",
+      dates: "2023",
+      location: "Machine Learning Project",
       links: [
         {
           title: "GitHub",
-          icon: <Icons.github className="size-4" />,
-          href: "https://github.com/mziroudi/Annotation",
-        },
-      ],
+          href: "https://github.com/mziroudi/Thyroid_Classefication_in_pytorch",
+          icon: Icons.github
+        }
+      ]
     },
     {
       title: "motive",
@@ -301,11 +309,10 @@ export const DATA = {
       image: "",
       links: [
         {
-          title: "GitHub",
-          icon: Icons.github,
-          href: "https://github.com/mziroudi/myportfolio",
-        },
-      ],
+          title: 'GitHub',
+          href: 'https://github.com/mziroudi/motive',
+          icon: Icons.github
+        }]
     },
     {
       title: "travel",

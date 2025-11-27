@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 
+
 interface Props {
   title: string;
   description: string;
@@ -9,13 +10,13 @@ interface Props {
   location: string;
   image?: string;
   links?: readonly {
-    icon: React.ReactNode;
+    icon: React.ReactNode | ((props: { className?: string }) => React.ReactNode);
     title: string;
     href: string;
   }[];
 }
 
-function HackathonCard({
+export function HackathonCard({
   title,
   description,
   dates,
@@ -50,8 +51,12 @@ function HackathonCard({
           {links?.map((link, idx) => (
             <Link href={link.href} key={idx}>
               <Badge key={idx} title={link.title} className="flex gap-2">
-                {link.icon}
-                {link.title}
+                {link.icon && (
+                  <Badge variant="secondary" className="text-sm font-medium">
+                    {typeof link.icon === 'function' ? link.icon({ className: "size-4" }) : link.icon}
+                    <span className="ml-2">{link.title}</span>
+                  </Badge>
+                )}
               </Badge>
             </Link>
           ))}
@@ -60,3 +65,4 @@ function HackathonCard({
     </li>
   );
 }
+

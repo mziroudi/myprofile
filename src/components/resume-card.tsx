@@ -100,7 +100,14 @@ export const ResumeCard = ({
               }}
               className="mt-2 text-xs sm:text-sm"
             >
-              {description}
+              <ul className="list-none space-y-2 px-4">
+                {description.split('\n').filter(line => line.trim()).map((point, index) => (
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="text-primary mt-0.5 flex-shrink-0">•</span>
+                    <span className="text-muted-foreground leading-relaxed">{point.replace(/^•\s*/, '')}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           )}
         </div>

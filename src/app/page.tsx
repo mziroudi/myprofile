@@ -1,4 +1,5 @@
 import { HackathonCard } from "@/components/hackathon-card";
+
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
 import { ProjectCard } from "@/components/project-card";
@@ -145,7 +146,10 @@ export default function Page() {
                   tags={project.technologies}
                   image={project.image}
                   video={project.video}
-                  links={project.links}
+                  links={project.links?.map(link => ({
+                    ...link,
+                    icon: typeof link.icon === 'function' ? link.icon({ className: "size-3" }) : link.icon
+                  }))}
                 />
               </BlurFade>
             ))}
@@ -206,15 +210,14 @@ export default function Page() {
                 Get in Touch
               </h2>
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Want to chat? Just shoot me a dm{" "}
+                I welcome professional inquiries and collaboration opportunities. Feel free to{" "}
                 <Link
-                  href={DATA.contact.social.X.url}
+                  href={`mailto:${DATA.contact.email}`}
                   className="text-blue-500 hover:underline"
                 >
-                  with a direct question on twitter
-                </Link>{" "}
-                and I&apos;ll respond whenever I can. I will ignore all
-                soliciting.
+                  reach out via email
+                </Link>
+                , and I will respond at my earliest convenience.
               </p>
             </div>
           </BlurFade>
