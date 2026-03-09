@@ -146,10 +146,11 @@ export default function Page() {
                   tags={project.technologies}
                   image={project.image}
                   video={project.video}
-                  links={project.links?.map(link => ({
-                    ...link,
-                    icon: typeof link.icon === 'function' ? link.icon({ className: "size-3" }) : link.icon
-                  }))}
+                  links={project.links?.map((link) => {
+                    const icon = typeof link.icon === "function" ? link.icon({ className: "size-3" }) : link.icon;
+                    const type = "type" in link ? link.type : (link as { title?: string }).title ?? "";
+                    return { icon, type, href: link.href };
+                  })}
                 />
               </BlurFade>
             ))}
@@ -190,7 +191,7 @@ export default function Page() {
                     description={project.description}
                     location={project.location}
                     dates={project.dates}
-                    image={project.image}
+                    image={"image" in project ? project.image : undefined}
                     links={project.links}
                   />
                 </BlurFade>
