@@ -21,6 +21,75 @@ interface Props {
   className?: string;
 }
 
+/**
+ * Typographic cover used when a project has no screenshot.
+ * Each project gets a variant based on its number so the grid feels composed.
+ */
+function ProjectCover({
+  number,
+  title,
+  tags,
+  dates,
+}: {
+  number?: string;
+  title: string;
+  tags: readonly string[];
+  dates: string;
+}) {
+  const n = number ? parseInt(number, 10) : 0;
+  const variant = n % 3;
+
+  return (
+    <div className="relative flex h-full w-full flex-col justify-between overflow-hidden bg-card p-6 sm:p-8">
+      {/* subtle grid texture */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(to right, hsl(var(--foreground)) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+        aria-hidden
+      />
+
+      {/* top meta */}
+      <div className="relative flex items-start justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+        <span>№ {number ?? "—"}</span>
+        <span>{dates}</span>
+      </div>
+
+      {/* center title (variant-specific treatment) */}
+      <div className="relative flex flex-1 items-center justify-center py-6">
+        {variant === 0 ? (
+          <p className="font-display text-[clamp(2rem,6vw,4rem)] font-light italic leading-[0.95] tracking-tight text-foreground text-balance">
+            {title.split(" - ")[0]}
+          </p>
+        ) : variant === 1 ? (
+          <p className="text-center font-display text-[clamp(1.75rem,5vw,3rem)] font-medium leading-[0.95] tracking-tight text-foreground text-balance">
+            {title.split(" - ")[0]}
+            <span className="mt-2 block font-light italic text-muted-foreground text-[0.65em]">
+              {title.includes(" - ") ? title.split(" - ")[1] : ""}
+            </span>
+          </p>
+        ) : (
+          <p className="font-display text-[clamp(5rem,14vw,10rem)] font-light italic leading-none text-foreground">
+            {String(number ?? "").replace(/^0/, "")}
+            <span className="text-muted-foreground/50">.</span>
+          </p>
+        )}
+      </div>
+
+      {/* bottom stack */}
+      <div className="relative flex items-end justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="max-w-[70%] truncate">
+          {tags.slice(0, 3).join(" · ")}
+        </span>
+        <span aria-hidden className="text-foreground">↗</span>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectCard({
   number,
   title,
@@ -62,13 +131,9 @@ export function ProjectCard({
             />
           )}
           {!video && !image && (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-muted to-background/60">
-              <span className="font-display text-7xl italic text-muted-foreground/30 sm:text-8xl">
-                {title.slice(0, 1)}
-              </span>
-            </div>
+            <ProjectCover number={number} title={title} tags={tags} dates={dates} />
           )}
-          {number ? (
+          {number && (video || image) ? (
             <span className="absolute left-4 top-4 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/80 mix-blend-difference">
               № {number}
             </span>
