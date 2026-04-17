@@ -178,7 +178,7 @@ export const DATA = {
     },
     {
       title: "MedicPro - Prosthetics & Orthopedic Solutions Platform",
-      href: "#",
+      href: "https://www.medicpro.ma/",
       dates: "Jan 2024 - Present",
       active: true,
       description: "Designed an empathy-driven, accessible healthcare platform for a leading provider of prosthetics and orthotics. The project prioritized patient education, trust-building, and WCAG compliance to support individuals with disabilities and their families through a sensitive healthcare journey.",
@@ -191,13 +191,13 @@ export const DATA = {
       ],
       links: [
         {
-          title: "GitHub",
-          href: "#",
-          icon: Icons.github
-        }
+          title: "Website",
+          href: "https://www.medicpro.ma/",
+          icon: Icons.globe,
+        },
       ],
       image: "",
-      video: ""
+      video: "",
     },
     {
       title: "Primolegno.ma - Premium Architectural Interior Design Platform",
