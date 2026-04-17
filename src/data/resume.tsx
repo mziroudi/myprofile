@@ -8,7 +8,7 @@ export const DATA = {
   location: "Casablanca, Morocco",
   locationLink: "https://www.google.com/maps/search/Casablanca,+Morocco",
   description:
-    "",
+    "Product design, systems thinking, and craft-led digital experiences.",
   summary:
     "Product Designer and Computer Engineer with 7+ years experience leading high-performance teams. Expert in UX design, AI technologies, and data pipelines using Figma, Miro, and Adobe CS. Proven track record of elevating user experiences and product performance, Passionate about creating innovative solutions that drive progress.",
   avatarUrl: "/me.jpg",
@@ -60,7 +60,7 @@ export const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/mouadziroudi", // Assuming a GitHub URL based on name
+        url: "https://github.com/mouadziroudi",
         icon: Icons.github,
 
         navbar: true,
@@ -79,10 +79,10 @@ export const DATA = {
 
         navbar: true,
       },
-      Youtube: {
-        name: "Youtube",
-        url: "#", // No Youtube link provided
-        icon: Icons.youtube,
+      Medium: {
+        name: "Medium",
+        url: "https://medium.com/@mouad.ziroudi/about",
+        icon: Icons.medium,
         navbar: true,
       },
       email: {

@@ -1,0 +1,46 @@
+---
+title: "Design systems are arguments, not libraries"
+publishedAt: "2025-03-12"
+summary: "A design system isn't a pile of components — it's a position on how your product should feel, enforced in code."
+---
+
+Most "design systems" are really just component libraries with a colour
+palette stapled to the front. They ship Buttons and Inputs, document a few
+tokens, and stop there. The team downstream now has a kit — but no opinion.
+
+A real design system is an **argument** about how your product should feel.
+It says: here's what we believe about hierarchy, rhythm, motion, and
+restraint — and the components are what those beliefs look like when they
+touch the screen.
+
+## Why the distinction matters
+
+If a system is just a library, any new pattern is additive. You keep adding.
+You end up with three button variants that solve the same problem in slightly
+different ways, and the product drifts.
+
+If a system is an argument, every new pattern has to survive the argument.
+*Does this belong here? Is this the simplest way to express our stance? If
+we ship this, what are we saying?*
+
+The answer is often: don't ship it. Compose the thing from what already
+exists. Hold the line.
+
+## The test I use
+
+Before adding anything to a system I ask three questions:
+
+1. **Does this express a belief we already hold?** If we can't articulate the
+   belief in one sentence, the pattern isn't ready.
+2. **Does it eliminate ambiguity downstream?** Good system work removes
+   choices that shouldn't exist, not adds choices that sound flexible.
+3. **If removed in a year, would anyone notice?** If no, it's noise. If yes,
+   it earns its place.
+
+The best systems I've worked on felt almost austere. The components were
+deliberate. The docs were short. The team shipped faster because the argument
+had already been had — and written down in code.
+
+A library is a grab-bag. A system is a point of view.
+
+— M.

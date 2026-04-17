@@ -1,17 +1,10 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
 
 interface Props {
+  number?: string;
   title: string;
   href?: string;
   description: string;
@@ -29,6 +22,7 @@ interface Props {
 }
 
 export function ProjectCard({
+  number,
   title,
   href,
   description,
@@ -41,76 +35,101 @@ export function ProjectCard({
   className,
 }: Props) {
   return (
-    <Card
-      className={
-        "flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full"
-      }
-    >
+    <article className={cn("group flex h-full flex-col gap-4", className)}>
+      {/* Image plate */}
       <Link
         href={href || "#"}
-        className={cn("block cursor-pointer", className)}
+        className="relative block overflow-hidden border border-border bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-4 focus-visible:ring-offset-background"
       >
-        {video && (
-          <video
-            src={video}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="pointer-events-none mx-auto h-40 w-full object-cover object-top" // needed because random black line at bottom of video
-          />
-        )}
-        {image && (
-          <Image
-            src={image}
-            alt={title}
-            width={500}
-            height={300}
-            className="h-40 w-full overflow-hidden object-cover object-top"
-          />
-        )}
-      </Link>
-      <CardHeader className="px-2">
-        <div className="space-y-1">
-          <CardTitle className="mt-1 text-base">{title}</CardTitle>
-          <time className="font-sans text-xs">{dates}</time>
-          <div className="hidden font-sans text-xs underline print:visible">
-            {link?.replace("https://", "").replace("www.", "").replace("/", "")}
-          </div>
-          <Markdown className="prose max-w-full text-pretty font-sans text-xs text-muted-foreground dark:prose-invert">
-            {description}
-          </Markdown>
+        <div className="relative aspect-[4/3] w-full">
+          {video && (
+            <video
+              src={video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
+            />
+          )}
+          {image && (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition duration-700 group-hover:scale-[1.025]"
+            />
+          )}
+          {!video && !image && (
+            <div className="flex h-full items-center justify-center bg-gradient-to-br from-muted to-background/60">
+              <span className="font-display text-7xl italic text-muted-foreground/30 sm:text-8xl">
+                {title.slice(0, 1)}
+              </span>
+            </div>
+          )}
+          {number ? (
+            <span className="absolute left-4 top-4 font-mono text-[10px] uppercase tracking-[0.22em] text-foreground/80 mix-blend-difference">
+              № {number}
+            </span>
+          ) : null}
         </div>
-      </CardHeader>
-      <CardContent className="mt-auto flex flex-col px-2">
+      </Link>
+
+      {/* Caption */}
+      <div className="flex flex-col gap-3">
+        <div className="flex items-baseline justify-between gap-4">
+          <h3 className="font-display text-[22px] font-medium leading-tight tracking-tight text-foreground sm:text-2xl">
+            <Link
+              href={href || "#"}
+              className="transition-colors hover:text-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              {title}
+            </Link>
+          </h3>
+          <time className="shrink-0 pt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            {dates}
+          </time>
+        </div>
+
+        <Markdown className="prose prose-sm prose-neutral max-w-prose font-sans text-[14px] leading-relaxed text-muted-foreground dark:prose-invert prose-p:m-0">
+          {description}
+        </Markdown>
+
         {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
-            {tags?.map((tag) => (
-              <Badge
-                className="px-1 py-0 text-[10px]"
-                variant="secondary"
-                key={tag}
-              >
-                {tag}
-              </Badge>
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            {tags.map((t, i) => (
+              <span key={t}>
+                <span className="text-foreground/80">{t}</span>
+                {i < tags.length - 1 ? <span className="text-border"> · </span> : null}
+              </span>
             ))}
-          </div>
+          </p>
         )}
-      </CardContent>
-      <CardFooter className="px-2 pb-2">
+
         {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-1">
-            {links?.map((link, idx) => (
-              <Link href={link?.href} key={idx} target="_blank">
-                <Badge key={idx} className="flex gap-2 px-2 py-1 text-[10px]">
-                  {link.icon}
-                  {link.type}
-                </Badge>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
+            {links.map((item, idx) => (
+              <Link
+                href={item.href}
+                key={idx}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.15em] text-foreground underline decoration-[0.04em] underline-offset-[0.3em] decoration-foreground/30 transition-colors hover:decoration-foreground"
+              >
+                {item.icon}
+                {item.type}
+                <span aria-hidden>↗</span>
               </Link>
             ))}
           </div>
         )}
-      </CardFooter>
-    </Card>
+      </div>
+
+      {/* hidden print link */}
+      <div className="sr-only">
+        {link?.replace("https://", "").replace("www.", "")}
+      </div>
+    </article>
   );
 }

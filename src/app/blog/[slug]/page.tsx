@@ -88,20 +88,28 @@ export default async function Blog({
           }),
         }}
       />
-      <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
-        <Suspense fallback={<p className="h-5" />}>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">
-            {formatDate(post.metadata.publishedAt)}
-          </p>
-        </Suspense>
+      <div className="mx-auto max-w-[44rem]">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Journal · Entry
+        </p>
+        <h1 className="mt-6 font-display text-[clamp(2.25rem,6vw,4rem)] font-medium leading-[0.98] tracking-[-0.02em] text-foreground">
+          {post.metadata.title}
+        </h1>
+        <div className="mt-6 mb-12 flex items-center justify-between border-b border-border pb-6">
+          <Suspense fallback={<p className="h-5" />}>
+            <time className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              {formatDate(post.metadata.publishedAt)}
+            </time>
+          </Suspense>
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            {DATA.name}
+          </span>
+        </div>
+        <article
+          className="prose prose-neutral max-w-none font-display text-[17px] leading-[1.7] dark:prose-invert prose-headings:font-display prose-headings:font-medium prose-headings:italic prose-headings:tracking-tight prose-p:font-display prose-p:leading-[1.7] prose-a:underline prose-a:decoration-foreground/40 prose-a:underline-offset-4 prose-a:text-foreground hover:prose-a:decoration-foreground"
+          dangerouslySetInnerHTML={{ __html: post.source }}
+        />
       </div>
-      <article
-        className="prose dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: post.source }}
-      ></article>
     </section>
   );
 }

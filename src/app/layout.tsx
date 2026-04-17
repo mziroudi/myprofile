@@ -4,25 +4,32 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-const fontSans = FontSans({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+const fontDisplay = Fraunces({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
     default: DATA.name,
-    template: `%s | ${DATA.name}`,
+    template: `%s — ${DATA.name}`,
   },
-  description: DATA.description,
+  description: DATA.description || DATA.summary.slice(0, 160),
   openGraph: {
     title: `${DATA.name}`,
-    description: DATA.description,
+    description: DATA.description || DATA.summary.slice(0, 160),
     url: DATA.url,
     siteName: `${DATA.name}`,
     locale: "en_US",
@@ -58,11 +65,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased max-w-2xl mx-auto py-12 sm:py-24 px-6",
-          fontSans.variable
+          "relative min-h-screen font-sans",
+          "mx-auto max-w-[min(100vw-1.25rem,78rem)] px-5 pb-32 pt-10 sm:px-10 sm:pb-36 sm:pt-14",
+          fontSans.variable,
+          fontDisplay.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <TooltipProvider delayDuration={0}>
             {children}
             <Navbar />

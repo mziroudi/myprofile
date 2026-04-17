@@ -3,142 +3,179 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-      --background: 0 0% 100%;
-      --foreground: 210 11.1% 3.53%;
+  /* Light — cool concrete, editorial paper */
+  :root {
+    --background: 210 10% 92%;
+    --foreground: 215 20% 12%;
 
-      --card: 0 0% 100%;
-      --card-foreground: 210 11.1% 3.53%;
+    --card: 210 12% 95%;
+    --card-foreground: 215 20% 12%;
 
-      --popover: 0 0% 100%;
-      --popover-foreground: 210 11.1% 3.53%;
+    --popover: 210 12% 95%;
+    --popover-foreground: 215 20% 12%;
 
-      --primary: 0 0% 9%;
-      --primary-foreground: 0 0% 98%;
+    --primary: 215 20% 12%;
+    --primary-foreground: 210 12% 96%;
 
-      --secondary: 0 0% 96.1%;
-      --secondary-foreground: 0 0% 9%;
+    --secondary: 210 8% 86%;
+    --secondary-foreground: 215 20% 12%;
 
-      --muted: 0 0% 96.1%;
-      --muted-foreground: 0 0% 45.1%;
+    --muted: 210 8% 88%;
+    --muted-foreground: 215 10% 40%;
 
-      --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 210 8% 86%;
+    --accent-foreground: 215 20% 12%;
 
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 0 0% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 210 12% 96%;
 
-      --border: 0 0% 89.8%;
-      --input: 0 0% 89.8%;
-      --ring: 0 0% 3.9%;
+    --border: 210 8% 78%;
+    --input: 210 8% 78%;
+    --ring: 215 20% 12%;
 
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      --background: 210 11.1% 3.53%;
-      --foreground: 0 0% 98%;
-
-      --card: 210 11.1% 3.53%;
-      --card-foreground: 0 0% 98%;
-
-      --popover: 210 11.1% 3.53%;
-      --popover-foreground: 0 0% 98%;
-
-      --primary: 0 0% 98%;
-      --primary-foreground: 0 0% 9%;
-
-      --secondary: 0 0% 14.9%;
-      --secondary-foreground: 0 0% 98%;
-
-      --muted: 0 0% 14.9%;
-      --muted-foreground: 0 0% 63.9%;
-
-      --accent: 0 0% 14.9%;
-      --accent-foreground: 0 0% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
-
-      --border: 0 0% 14.9%;
-      --input: 0 0% 14.9%;
-      --ring: 0 0% 83.1%;
-    }
+    --radius: 0rem;
   }
 
-  @layer base {
-    * {
-      @apply border-border;
-    }
-    body {
-      @apply bg-background text-foreground;
-    }
+  /* Dark — charcoal stone */
+  .dark {
+    --background: 215 18% 9%;
+    --foreground: 210 10% 94%;
+
+    --card: 215 16% 12%;
+    --card-foreground: 210 10% 94%;
+
+    --popover: 215 16% 12%;
+    --popover-foreground: 210 10% 94%;
+
+    --primary: 210 10% 94%;
+    --primary-foreground: 215 18% 9%;
+
+    --secondary: 215 14% 16%;
+    --secondary-foreground: 210 10% 94%;
+
+    --muted: 215 12% 18%;
+    --muted-foreground: 210 8% 62%;
+
+    --accent: 215 14% 16%;
+    --accent-foreground: 210 10% 94%;
+
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 210 10% 94%;
+
+    --border: 215 12% 22%;
+    --input: 215 12% 22%;
+    --ring: 210 10% 94%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
   }
 
-  h3 code {
-    @apply !text-lg md:!text-xl;
-  }
-  
-  pre {
-    @apply !px-0 rounded-lg overflow-x-auto py-4
-  }
-   
-  pre [data-line] {
-    @apply px-4
+  html {
+    scroll-behavior: smooth;
   }
 
-  code {
-    @apply text-sm md:text-base !leading-loose;
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "ss01" 1, "ss02" 1;
   }
-  
-  pre > code {
-    counter-reset: line;
+
+  ::selection {
+    @apply bg-foreground text-background;
   }
-  
+
+  .font-display {
+    font-family: var(--font-display), ui-serif, Georgia, "Times New Roman", serif;
+  }
+
+  /* Drop cap for editorial intros */
+  .dropcap::first-letter {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+    font-weight: 500;
+    float: left;
+    font-size: 4.25em;
+    line-height: 0.88;
+    padding-top: 0.08em;
+    padding-right: 0.1em;
+    padding-left: 0;
+    color: hsl(var(--foreground));
+  }
+
+  .hairline {
+    background-image: linear-gradient(
+      to right,
+      transparent 0,
+      hsl(var(--border)) 0,
+      hsl(var(--border)) 100%
+    );
+    height: 1px;
+  }
+}
+
+h3 code {
+  @apply !text-lg md:!text-xl;
+}
+
+pre {
+  @apply !px-0 rounded-lg overflow-x-auto py-4;
+}
+
+pre [data-line] {
+  @apply px-4;
+}
+
+code {
+  @apply text-sm md:text-base !leading-loose;
+}
+
+pre > code {
+  counter-reset: line;
+}
+
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+@media (prefers-color-scheme: dark) {
   code[data-theme*=" "],
   code[data-theme*=" "] span {
-    color: var(--shiki-light);
-    background-color: var(--shiki-light-bg);
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
-   
-  @media (prefers-color-scheme: dark) {
-    code[data-theme*=" "],
-    code[data-theme*=" "] span {
-      color: var(--shiki-dark);
-      background-color: var(--shiki-dark-bg);
-    }
-  }
-  
-  code[data-line-numbers] {
-    counter-reset: line;
-  }
-  
-  code[data-line-numbers] > [data-line]::before {
-    counter-increment: line;
-    content: counter(line);
-    @apply inline-block w-4 mr-4 text-right text-gray-500;
-  }
- 
-  code {
-    counter-reset: line;
-  }
- 
-  code > [data-line]::before {
+}
+
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
- 
-  /* Other styling */
+  @apply inline-block w-4 mr-4 text-right text-gray-500;
+}
+
+code {
+  counter-reset: line;
+}
+
+code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
   display: inline-block;
   width: 1rem;
   margin-right: 2rem;
   text-align: right;
   color: gray;
 }
- 
+
 code[data-line-numbers-max-digits="2"] > [data-line]::before {
   width: 2rem;
 }
- 
+
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
