@@ -1,304 +1,320 @@
-import { HackathonCard } from "@/components/hackathon-card";
-import BlurFade from "@/components/magicui/blur-fade";
-import { ProjectCard } from "@/components/project-card";
-import { ResumeCard } from "@/components/resume-card";
-import { SectionLabel } from "@/components/site/section-label";
-import { DATA } from "@/data/resume";
-import Link from "next/link";
+/* eslint-disable @next/next/no-img-element */
+import type { CSSProperties } from "react";
+import type { Metadata } from "next";
+import { HomeEffects } from "./home-effects";
+import "./home.css";
 
-const D = 0.05;
+export const metadata: Metadata = {
+  title: { absolute: "Mouad Ziroudi" },
+  description:
+    "Mouad Ziroudi designs websites, online shops and product interfaces in Figma, then builds them in WordPress, React and Python. Based in Casablanca.",
+  openGraph: { images: ["/share.jpg"] },
+};
+
+const MAIL = "mailto:mouad.ziroudi@gmail.com?subject=Project%20brief";
+const TOOLS = ["Figma", "WordPress", "WooCommerce", "React", "Next.js", "Python", "PyTorch", "Design systems"];
+const STATEMENT = "Same hands from the Figma file to the live site. Nothing gets lost in between.";
+
+const SERVICES = [
+  { n: "01", title: "Websites", text: "Designed in Figma and built in WordPress, so your team can update the site without calling me.", tags: ["Figma", "WordPress", "Responsive"] },
+  { n: "02", title: "Online shops", text: "WooCommerce shops with catalogues, checkout and content in French and Arabic.", tags: ["WooCommerce", "Bilingual", "Catalogues"] },
+  { n: "03", title: "Product design", text: "Research, flows, prototypes and design systems for web apps, handed over with specs or built in React.", tags: ["User research", "Design systems", "React"] },
+  { n: "04", title: "AI prototypes", text: "Working prototypes with models and retrieval, measured honestly before anyone ships them.", tags: ["Python", "PyTorch", "RAG"] },
+];
+
+const WORK = [
+  { slug: "primolegno", name: "Primolegno", year: "2024", url: "https://primolegno.ma/", w: 1200, h: 750, alt: "Primolegno collections page: a black lacquered door, an oak door and walnut wall panels", text: "A showcase for a luxury joinery brand: doors, wall panels and hotel projects, written for architects." },
+  { slug: "medicpro", name: "MedicPro", year: "2024", url: "https://www.medicpro.ma/", w: 1200, h: 750, alt: "MedicPro page on upper-limb prosthetics with a photo of a smiling patient", text: "An accessible site for a prosthetics and orthotics provider, written for patients and their families." },
+  { slug: "artsclinic", name: "Art’s Clinic", year: "2023", url: "https://artsclinic.com/", w: 992, h: 620, alt: "Art’s Clinic home page with its side menu and appointment button", text: "Site and appointment booking for a dental and aesthetic medicine clinic in Casablanca." },
+  { slug: "darnjara", name: "Dar Njara", year: "2022", url: "https://darnjara.ma/", w: 1440, h: 900, alt: "Dar Njara shop with its door categories and a walk-in wardrobe", text: "A WooCommerce shop for doors, wardrobes and kitchens, in French and Arabic." },
+  { slug: "hssmaroc", name: "HSS Maroc", year: "2021", url: "https://hssmaroc.com/", w: 1152, h: 720, alt: "HSS Maroc home page with its premium appliances banner over a dark kitchen", text: "The brand site and catalogue of the Moroccan distributor of Franke kitchen appliances." },
+  { slug: "touarga", name: "Touarga Club", year: "2020", url: "https://touargaclub.ma/", w: 1440, h: 900, alt: "Touarga Club home page with the next fixture and the last result over a stadium", text: "A football club site with fixtures, results, news and the youth academy." },
+];
+
+const XP = [
+  ["2024 to now", "Senior Product Designer", "Evermore Digital"],
+  ["2018 to 2023", "UI/UX Designer and Product Developer", "MoreCommunication"],
+  ["2020", "Analyst Programmer", "Morservs"],
+  ["2020", "Master’s, Application Design and Development", "University of Science and Technology, Settat"],
+  ["2017", "Bachelor’s, Application Design and Development", "University of Science and Technology, Settat"],
+];
+
+const RAG = [
+  ["BM25 only", 1, "1.00"],
+  ["Hybrid, rank fusion", 0.88, "0.88"],
+  ["Dense only", 0.74, "0.74"],
+  ["Hybrid and reranker", 0.36, "0.36"],
+] as const;
+
+const v = (vars: Record<string, string | number>) => vars as CSSProperties;
 
 export default function Page() {
-  const year = new Date().getFullYear();
-  const firstName = DATA.name.split(" ")[0];
-
   return (
-    <main className="relative flex flex-col">
-      {/* Masthead — magazine header strip */}
-      <header className="flex flex-col gap-6 border-b border-foreground/90 pb-3">
-        <BlurFade delay={D}>
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-            <span className="text-foreground">Issue 01 · Vol. 07 · {year}</span>
-            <span>{DATA.location}</span>
-            <span>—</span>
-            <span>Portfolio / Monograph</span>
-          </div>
-        </BlurFade>
+    <div className="v3">
+      <a className="skip" href="#main">Skip to content</a>
 
-        <BlurFade delay={D * 2}>
-          <div className="flex items-end justify-between gap-6">
-            <h1 className="font-display text-[clamp(3.5rem,14vw,10rem)] font-medium leading-[0.82] tracking-[-0.03em] text-foreground">
-              {DATA.name.split(" ")[0]}
-              <span className="italic font-light"> {DATA.name.split(" ").slice(1).join(" ")}</span>
-            </h1>
-            <p className="hidden max-w-[18ch] shrink-0 pb-3 text-right font-display text-sm italic leading-tight text-muted-foreground sm:block">
-              Product design, systems, and craft — a working archive.
-            </p>
-          </div>
-        </BlurFade>
+      <header className="nav">
+        <a className="nav__logo" href="#top">Mouad Ziroudi<sup>©</sup></a>
+        <nav className="nav__links" aria-label="Main">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="/blog">Journal</a>
+        </nav>
+        <span className="nav__time mono" data-clock>Casablanca</span>
+        <a className="nav__cta" href="#contact">Let’s talk</a>
       </header>
 
-      {/* Thin contents strip */}
-      <BlurFade delay={D * 3}>
-        <nav className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-border py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          <span className="text-foreground">Contents</span>
-          <a href="#work-index" className="transition-colors hover:text-foreground">I. Work</a>
-          <a href="#about" className="transition-colors hover:text-foreground">II. Profile</a>
-          <a href="#experience" className="transition-colors hover:text-foreground">III. Experience</a>
-          <a href="#labs" className="transition-colors hover:text-foreground">IV. Labs</a>
-          <a href="#index" className="transition-colors hover:text-foreground">V. Index</a>
-          <a href="#contact" className="transition-colors hover:text-foreground">VI. Contact</a>
-        </nav>
-      </BlurFade>
-
-      {/* Work — contact sheet grid (OPENS THE PAGE) */}
-      <section id="work-index" className="scroll-mt-24 border-b border-border py-10 sm:py-14">
-        <div className="mb-8 flex items-end justify-between gap-6 sm:mb-12">
-          <BlurFade delay={D * 4}>
-            <div className="flex items-baseline gap-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">I.</span>
-              <h2 className="font-display text-2xl font-medium italic tracking-tight text-foreground sm:text-3xl">
-                Selected work
-              </h2>
+      <main id="main">
+        {/* hero */}
+        <section className="hero" id="top" aria-labelledby="name">
+          <div className="wrap hero__in">
+            <div className="hero__meta mono">
+              <span><i className="dot" aria-hidden="true" />Available for new projects</span>
+              <span>Product designer &amp; engineer</span>
+              <span>Casablanca, MA</span>
             </div>
-          </BlurFade>
-          <BlurFade delay={D * 5}>
-            <p className="hidden font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground sm:block">
-              {DATA.projects.length} entries · 2020–{year}
-            </p>
-          </BlurFade>
-        </div>
-
-        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:gap-x-8 md:gap-y-14 lg:grid-cols-12">
-          {DATA.projects.map((project, id) => {
-            // asymmetric magazine grid: alternate wide / narrow spans on desktop
-            const spans = [
-              "lg:col-span-7",
-              "lg:col-span-5",
-              "lg:col-span-5",
-              "lg:col-span-7",
-              "lg:col-span-6",
-              "lg:col-span-6",
-            ];
-            const span = spans[id % spans.length];
-            return (
-              <BlurFade
-                key={project.title}
-                delay={D * 6 + id * 0.04}
-                className={span}
-              >
-                <ProjectCard
-                  number={String(id + 1).padStart(2, "0")}
-                  href={project.href}
-                  title={project.title}
-                  description={project.description}
-                  dates={project.dates}
-                  tags={project.technologies}
-                  image={project.image}
-                  video={project.video}
-                  links={project.links?.map((link) => {
-                    const icon =
-                      typeof link.icon === "function" ? link.icon({ className: "size-3" }) : link.icon;
-                    const type = "type" in link ? link.type : (link as { title?: string }).title ?? "";
-                    return { icon, type, href: link.href };
-                  })}
-                />
-              </BlurFade>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Profile / About — editorial drop cap */}
-      <section id="about" className="scroll-mt-24 border-b border-border py-12 sm:py-16">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-4">
-            <BlurFade delay={D * 7}>
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">II.</span>
-              <h2 className="mt-4 font-display text-3xl font-medium italic leading-[0.95] tracking-tight text-foreground sm:text-4xl">
-                Profile
-              </h2>
-              <p className="mt-5 max-w-[24ch] font-display text-base italic leading-snug text-muted-foreground">
-                A Casablanca-based senior product designer.
-              </p>
-            </BlurFade>
-          </div>
-          <BlurFade delay={D * 8} className="md:col-span-8">
-            <p className="dropcap font-display text-xl leading-[1.5] text-foreground sm:text-[22px]">
-              {DATA.summary}
-            </p>
-            <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-4 border-t border-border pt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground sm:grid-cols-4">
+            <h1 className="hero__name" id="name" aria-label="Mouad Ziroudi">
+              <span className="line" aria-hidden="true"><span>Mouad<span className="o">.</span></span></span>
+              <span className="line line--2" aria-hidden="true"><span>Ziroudi</span></span>
+            </h1>
+            <div className="hero__foot">
               <div>
-                <dt className="mb-1 text-[9px] tracking-[0.22em]">Based</dt>
-                <dd className="text-foreground">Casablanca</dd>
+                <p className="hero__say">
+                  <span className="sr">I design and build websites, online shops, product interfaces and AI prototypes.</span>
+                  <span aria-hidden="true">
+                    I design &amp; build<br />
+                    <span className="swap" data-swap>
+                      <span className="on">websites.</span>
+                      <span>online shops.</span>
+                      <span>product interfaces.</span>
+                      <span>AI prototypes.</span>
+                    </span>
+                  </span>
+                </p>
+                <p className="hero__lead">Figma first, then I build it myself in WordPress, React or Python. 7+ years for clinics, retailers, a football club and startups.</p>
               </div>
-              <div>
-                <dt className="mb-1 text-[9px] tracking-[0.22em]">Years</dt>
-                <dd className="text-foreground">7+</dd>
-              </div>
-              <div>
-                <dt className="mb-1 text-[9px] tracking-[0.22em]">Practice</dt>
-                <dd className="text-foreground">Product · UX</dd>
-              </div>
-              <div>
-                <dt className="mb-1 text-[9px] tracking-[0.22em]">Status</dt>
-                <dd className="text-foreground">Accepting work</dd>
-              </div>
-            </dl>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* Experience — numbered editorial list */}
-      <section id="experience" className="scroll-mt-24 border-b border-border py-12 sm:py-16">
-        <div className="mb-8 flex items-baseline gap-4 sm:mb-10">
-          <BlurFade delay={D * 9}>
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">III.</span>
-          </BlurFade>
-          <BlurFade delay={D * 9}>
-            <h2 className="font-display text-3xl font-medium italic tracking-tight text-foreground sm:text-4xl">
-              Experience
-            </h2>
-          </BlurFade>
-        </div>
-
-        <ol className="flex flex-col border-t border-border">
-          {DATA.work.map((work, id) => (
-            <BlurFade key={work.company} delay={D * 10 + id * 0.04}>
-              <ResumeCard
-                index={String(id + 1).padStart(2, "0")}
-                logoUrl={work.logoUrl}
-                altText={work.company}
-                title={work.company}
-                subtitle={work.title}
-                href={work.href}
-                badges={work.badges}
-                period={`${work.start} — ${work.end ?? "Present"}`}
-                description={work.description}
-              />
-            </BlurFade>
-          ))}
-        </ol>
-
-        {/* Education sub-section */}
-        <div className="mt-14 border-t border-border pt-10">
-          <BlurFade delay={D * 12}>
-            <div className="mb-6 flex items-baseline justify-between">
-              <h3 className="font-display text-xl font-medium italic tracking-tight text-foreground">
-                Education
-              </h3>
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                {DATA.education.length} entries
-              </span>
+              <a className="badge" href="#work" aria-label="See my work">
+                <svg className="badge__ring" viewBox="0 0 200 200" aria-hidden="true">
+                  <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
+                  <text fontFamily="Geist Mono, monospace" fontSize="15.5" fontWeight="500" letterSpacing="3.2" fill="#0f0f0e">
+                    <textPath href="#circ">SELECTED WORK • 2018 TO 2026 • SCROLL •</textPath>
+                  </text>
+                </svg>
+                <svg className="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7" /></svg>
+              </a>
             </div>
-          </BlurFade>
-          <ol className="flex flex-col border-t border-border">
-            {DATA.education.map((education, id) => (
-              <BlurFade key={education.school + education.start} delay={D * 13 + id * 0.04}>
-                <ResumeCard
-                  index={String(id + 1).padStart(2, "0")}
-                  href={education.href}
-                  logoUrl={education.logoUrl}
-                  altText={education.school}
-                  title={education.school}
-                  subtitle={education.degree}
-                  period={`${education.start} — ${education.end}`}
-                />
-              </BlurFade>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Labs — hackathons/experiments */}
-      <section id="labs" className="scroll-mt-24 border-b border-border py-12 sm:py-16">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-4">
-            <BlurFade delay={D * 14}>
-              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">IV.</span>
-              <h2 className="mt-4 font-display text-3xl font-medium italic tracking-tight text-foreground sm:text-4xl">
-                Laboratory
-              </h2>
-              <p className="mt-5 max-w-[26ch] font-display text-base italic leading-snug text-muted-foreground">
-                Side experiments — small pieces, loosely joined. Machine-learning trials, interface sketches, weekend builds.
-              </p>
-            </BlurFade>
           </div>
-          <BlurFade delay={D * 15} className="md:col-span-8">
-            <ol className="flex flex-col border-t border-border">
-              {DATA.hackathons.map((project, id) => (
-                <BlurFade
-                  key={project.title + project.dates}
-                  delay={D * 16 + id * 0.04}
-                >
-                  <HackathonCard
-                    index={String(id + 1).padStart(2, "0")}
-                    title={project.title}
-                    description={project.description}
-                    location={project.location}
-                    dates={project.dates}
-                    image={"image" in project ? project.image : undefined}
-                    links={project.links}
-                  />
-                </BlurFade>
+          <div className="marquee" aria-hidden="true">
+            <div className="marquee__track">
+              {[...TOOLS, ...TOOLS].map((t, k) => (
+                <span key={k} style={{ display: "contents" }}><span>{t}</span><b>✳</b></span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* services */}
+        <section className="light" id="services" aria-labelledby="svc-h">
+          <div className="wrap sec">
+            <div className="sec-head">
+              <p className="mono">(01) Services</p>
+              <h2 id="svc-h" data-reveal>What I can do<br />for <em>you</em></h2>
+            </div>
+            <ol className="svc">
+              {SERVICES.map((s) => (
+                <li key={s.n} data-reveal>
+                  <span className="svc__n mono">{s.n}</span>
+                  <h3>{s.title}</h3>
+                  <div>
+                    <p>{s.text}</p>
+                    <ul className="tags">{s.tags.map((t) => <li key={t}>{t}</li>)}</ul>
+                  </div>
+                </li>
               ))}
             </ol>
-          </BlurFade>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Index — skills list, magazine-style */}
-      <section id="index" className="scroll-mt-24 border-b border-border py-12 sm:py-16">
-        <div className="mb-8 flex items-baseline gap-4 sm:mb-10">
-          <BlurFade delay={D * 17}>
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">V.</span>
-          </BlurFade>
-          <BlurFade delay={D * 17}>
-            <h2 className="font-display text-3xl font-medium italic tracking-tight text-foreground sm:text-4xl">
-              Index
-            </h2>
-          </BlurFade>
-        </div>
-        <BlurFade delay={D * 18}>
-          <p className="font-display text-lg leading-[1.7] text-muted-foreground sm:text-xl">
-            {DATA.skills.map((skill, i) => (
-              <span key={skill}>
-                <span className="text-foreground">{skill}</span>
-                {i < DATA.skills.length - 1 ? (
-                  <span className="text-border"> · </span>
-                ) : null}
-              </span>
-            ))}
-          </p>
-        </BlurFade>
-      </section>
-
-      {/* Contact — editorial closing statement */}
-      <section id="contact" className="scroll-mt-24 py-16 sm:py-24">
-        <BlurFade delay={D * 19}>
-          <div className="flex flex-col gap-4">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              VI. — Colophon
-            </span>
-            <p className="font-display text-[clamp(2rem,6vw,4.5rem)] font-light leading-[0.98] tracking-[-0.02em] text-foreground">
-              For new work, write to{" "}
-              <Link
-                href={`mailto:${DATA.contact.email}`}
-                className="italic underline decoration-[0.05em] underline-offset-[0.12em] decoration-foreground/40 transition-colors hover:decoration-foreground"
-              >
-                {DATA.contact.email}
-              </Link>
-              .
+        {/* statement */}
+        <section className="statement" aria-label="How I work">
+          <div className="wrap sec">
+            <span className="mono">How I work</span>
+            <p className="big" data-words>
+              {STATEMENT.split(" ").map((w, k) => (
+                <span key={k}><span className="w">{w}</span>{" "}</span>
+              ))}
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-2 border-t border-border pt-5 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              <span className="text-foreground">{DATA.name} · © {year}</span>
-              <span>Issue 01</span>
-              <span>Set in Fraunces &amp; Inter</span>
-              <span>{DATA.location}</span>
+          </div>
+        </section>
+
+        {/* work */}
+        <section className="work" id="work" aria-labelledby="work-h">
+          <div className="work__pin">
+            <div className="wrap work__head">
+              <h2 id="work-h">Client websites<sup>(06)</sup></h2>
+              <p className="mono">(02) Selected work, 2020 to now</p>
+            </div>
+            <div className="work__track" data-track>
+              {WORK.map((c, k) => (
+                <a className="wcard" href={c.url} data-cursor="Visit" key={c.slug}>
+                  <figure>
+                    <img
+                      src={`/work/ch-${c.slug}.jpg`}
+                      srcSet={`/work/ch-${c.slug}-750.jpg 750w, /work/ch-${c.slug}.jpg ${c.w}w`}
+                      sizes="(max-width:640px) 90vw, 54vw"
+                      width={c.w}
+                      height={c.h}
+                      alt={c.alt}
+                      loading={k === 0 ? undefined : "lazy"}
+                    />
+                  </figure>
+                  <div className="wcard__row">
+                    <span className="mono">{String(k + 1).padStart(2, "0")}</span>
+                    <h3>{c.name}</h3>
+                    <span className="mono">{c.year}</span>
+                    <span className="wcard__go" aria-hidden="true">↗</span>
+                  </div>
+                  <p>{c.text}</p>
+                </a>
+              ))}
+            </div>
+            <div className="work__bar" aria-hidden="true"><i /></div>
+          </div>
+        </section>
+
+        {/* projects */}
+        <section className="light projects" id="projects" aria-labelledby="proj-h">
+          <div className="wrap sec">
+            <div className="sec-head">
+              <p className="mono">(03) On GitHub</p>
+              <h2 id="proj-h" data-reveal>AI projects,<br /><em>results</em> included</h2>
+            </div>
+            <div className="stack">
+              <article className="proj" style={v({ "--i": 0 })} data-reveal>
+                <div className="proj__txt">
+                  <div className="proj__top mono"><span>P-Wave Detection</span><span>Python · PyTorch</span></div>
+                  <h3>Detects earthquakes with a Python model</h3>
+                  <p>The model reached 97.4%, then I proved it was using a shortcut. An old STA/LTA trigger still raises fewer false alarms, and the write-up says so.</p>
+                  <div className="proj__metric"><b>97.4%</b><span>accuracy, before I found the shortcut</span></div>
+                  <a className="proj__link" href="https://github.com/mziroudi/P-Wave-Detection">View on GitHub ↗</a>
+                </div>
+                <div className="proj__vis">
+                  <img src="/work/pwave.jpg" srcSet="/work/pwave-480.jpg 480w, /work/pwave.jpg 1200w" sizes="(max-width:860px) 90vw, 44vw" width={1200} height={697} alt="Three seismogram traces of a local earthquake with the P-wave and S-wave arrivals marked" loading="lazy" />
+                </div>
+              </article>
+
+              <article className="proj proj--o" style={v({ "--i": 1 })} data-reveal>
+                <div className="proj__txt">
+                  <div className="proj__top mono"><span>RAG over SEC filings</span><span>Python · Retrieval</span></div>
+                  <h3>Answers questions over SEC filings</h3>
+                  <p>Four retrieval setups scored on 50 questions over Apple and NVIDIA filings. The fancy one lost: plain BM25 won.</p>
+                  <div className="proj__metric"><b>1.00</b><span>Recall@10 for plain BM25</span></div>
+                  <a className="proj__link" href="https://github.com/mziroudi/rag">View on GitHub ↗</a>
+                </div>
+                <div className="proj__vis">
+                  <div className="bars" role="img" aria-label="Recall at 10: BM25 only 1.00, hybrid with rank fusion 0.88, dense only 0.74, hybrid with reranker 0.36">
+                    {RAG.map(([label, val, txt]) => (
+                      <div className="bar" style={v({ "--v": val })} key={label}><span>{label}</span><b>{txt}</b><i /></div>
+                    ))}
+                    <p className="bars__cap mono">Recall@10 · 50 questions</p>
+                  </div>
+                </div>
+              </article>
+
+              <article className="proj proj--w" style={v({ "--i": 2 })} data-reveal>
+                <div className="proj__txt">
+                  <div className="proj__top mono"><span>AgentPay</span><span>API · Stripe</span></div>
+                  <h3>A spending API between AI agents and Stripe</h3>
+                  <p>Middleware that gives every agent a budget, sends large payments to a person for approval and keeps an audit trail of each one.</p>
+                  <div className="proj__metric"><b>3</b><span>checks before any agent spends: budget, approval, audit</span></div>
+                  <a className="proj__link" href="https://github.com/mziroudi/agentpay">View on GitHub ↗</a>
+                </div>
+                <div className="proj__vis">
+                  <div className="flow" role="img" aria-label="An AI agent asks AgentPay to pay. AgentPay checks the budget, pays small amounts through Stripe and sends large ones to a person for approval.">
+                    <div className="node"><b>AI agent</b><small>asks to pay</small></div>
+                    <span className="vline" />
+                    <div className="node node--hl"><b>AgentPay</b><small>budget check</small></div>
+                    <span className="vline" />
+                    <div className="split">
+                      <div className="node node--ok"><b>Stripe</b><small>small amounts, paid</small></div>
+                      <div className="node"><b>A person</b><small>approves large ones</small></div>
+                    </div>
+                    <p className="flow__log">audit trail · every request logged</p>
+                  </div>
+                </div>
+              </article>
+
+              <article className="proj proj--g" style={v({ "--i": 3 })} data-reveal>
+                <div className="proj__txt">
+                  <div className="proj__top mono"><span>Hdaya</span><span>Desktop · Vision</span></div>
+                  <h3>Answers questions about your screen</h3>
+                  <p>A desktop tutor: press Ctrl+Space in any app, ask your question, and it reads the screen to answer.</p>
+                  <div className="proj__metric"><b>Ctrl+Space</b><span>from any app</span></div>
+                  <a className="proj__link" href="https://github.com/mziroudi/hdaya">View on GitHub ↗</a>
+                </div>
+                <div className="proj__vis">
+                  <div>
+                    <div className="keys" aria-hidden="true"><kbd>Ctrl</kbd>+<kbd>Space</kbd></div>
+                    <div className="chat" role="img" aria-label="Example: in Blender the user asks how to bevel one edge and Hdaya answers: select the edge, then press Ctrl+B.">
+                      <div className="chat__head"><b>Hdaya</b><span>BLENDER</span></div>
+                      <div className="chat__body">
+                        <div className="msg msg--me">How do I bevel just this edge?</div>
+                        <div className="msg msg--bot">Select the edge, then press <kbd>Ctrl+B</kbd>. Scroll up to add segments.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
-        </BlurFade>
-      </section>
-    </main>
+        </section>
+
+        {/* about */}
+        <section id="about" aria-labelledby="about-h">
+          <div className="wrap sec">
+            <div className="sec-head">
+              <p className="mono">(04) About</p>
+              <h2 id="about-h" data-reveal>Engineer by training,<br />designer by <em>trade</em></h2>
+            </div>
+            <p className="about__intro" data-reveal>I studied application design and development, then spent 7+ years <span>between Figma and the code editor, for agencies, clinics, retailers and startups.</span></p>
+            <ol className="xp">
+              {XP.map(([when, role, where]) => (
+                <li data-reveal key={role}><span className="mono">{when}</span><b>{role}</b><span>{where}</span></li>
+              ))}
+            </ol>
+            <dl className="facts">
+              <div><dt className="mono">Based in</dt><dd>Casablanca, Morocco</dd></div>
+              <div><dt className="mono">Languages</dt><dd>Arabic, French, English</dd></div>
+              <div><dt className="mono">Design</dt><dd>Figma, Miro, design systems</dd></div>
+              <div><dt className="mono">Build</dt><dd>WordPress, WooCommerce, React, Next.js, Python</dd></div>
+            </dl>
+          </div>
+        </section>
+      </main>
+
+      {/* contact */}
+      <footer className="contact" id="contact" aria-labelledby="contact-h">
+        <div className="wrap sec">
+          <p className="mono" style={{ marginBottom: 28 }}>(05) Contact</p>
+          <h2 id="contact-h">Got a project?<br />Let’s talk.</h2>
+          <a className="mail" href={MAIL}>
+            mouad.ziroudi@gmail.com
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
+          </a>
+          <div className="foot">
+            <div><h4>Code</h4><a href="https://github.com/mziroudi">GitHub</a><a href="https://medium.com/@mouad.ziroudi/about">Medium</a></div>
+            <div><h4>Social</h4><a href="https://linkedin.com/in/mouad-ziroudi/">LinkedIn</a><a href="https://x.com/mouadziroudi">X</a></div>
+            <div><h4>Writing</h4><a href="/blog">Journal</a><p data-clock-plain>Casablanca</p></div>
+            <div><h4>© 2026</h4><p>Mouad Ziroudi. Client names and logos belong to their owners.</p></div>
+          </div>
+          <p className="bigword" aria-hidden="true">Ziroudi</p>
+        </div>
+      </footer>
+
+      <div className="cursor" aria-hidden="true"><span>Visit</span></div>
+      <HomeEffects />
+    </div>
   );
 }

@@ -1,6 +1,3 @@
-import Navbar from "@/components/navbar";
-import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -63,20 +60,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "relative min-h-screen font-sans",
-          "mx-auto max-w-[min(100vw-1.25rem,78rem)] px-5 pb-32 pt-10 sm:px-10 sm:pb-36 sm:pt-14",
-          fontSans.variable,
-          fontDisplay.variable
-        )}
-      >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-          <TooltipProvider delayDuration={0}>
-            {children}
-            <Navbar />
-          </TooltipProvider>
-        </ThemeProvider>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap"
+        />
+      </head>
+      <body className={cn("relative min-h-screen font-sans", fontSans.variable, fontDisplay.variable)}>
+        {children}
         <Analytics />
       </body>
     </html>
