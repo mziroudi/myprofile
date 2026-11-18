@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 // Client-side motion for the home page: Casablanca clock, rotating word,
-// scroll reveals, statement word highlight, pinned horizontal work gallery,
+// scroll reveals, statement word highlight,
 // nav colour per section and the custom cursor.
 export function HomeEffects() {
   useEffect(() => {
@@ -61,24 +61,7 @@ export function HomeEffects() {
     const nav = root.querySelector<HTMLElement>(".nav")!;
     const lightSecs = Array.from(root.querySelectorAll<HTMLElement>(".light, .statement, .contact"));
 
-    // pinned horizontal work gallery (desktop only)
-    const work = root.querySelector<HTMLElement>(".work")!;
-    const track = root.querySelector<HTMLElement>("[data-track]")!;
-    const bar = work.querySelector<HTMLElement>(".work__bar")!;
-    const desk = matchMedia("(min-width: 900px) and (min-height: 600px)");
-    let pinned = false;
-    let dist = 0;
-
     const onScroll = () => {
-      if (pinned) {
-        const r = work.getBoundingClientRect();
-        const p = Math.min(1, Math.max(0, -r.top / (work.offsetHeight - innerHeight || 1)));
-        track.style.transform = `translate3d(${-p * dist}px,0,0)`;
-        bar.style.setProperty("--p", String(p));
-      } else {
-        const max = track.scrollWidth - track.clientWidth;
-        bar.style.setProperty("--p", String(max ? track.scrollLeft / max : 0));
-      }
       let bg = "dark";
       for (const s of lightSecs) {
         const r = s.getBoundingClientRect();
@@ -96,33 +79,12 @@ export function HomeEffects() {
         words.forEach((w, k) => w.classList.toggle("on", k < n));
       }
     };
-    const layout = () => {
-      pinned = desk.matches && !reduce;
-      work.classList.toggle("is-pinned", pinned);
-      track.style.transform = "";
-      if (pinned) {
-        dist = Math.max(0, track.scrollWidth - innerWidth);
-        work.style.height = dist + innerHeight + "px";
-      } else {
-        work.style.height = "";
-      }
-      onScroll();
-    };
     addEventListener("scroll", onScroll, { passive: true });
-    track.addEventListener("scroll", onScroll, { passive: true });
-    addEventListener("resize", layout);
-    addEventListener("load", layout);
-    layout();
-    // images may change the track width after they load
-    const imgs = Array.from(track.querySelectorAll("img"));
-    imgs.forEach((im) => im.addEventListener("load", layout));
+    addEventListener("resize", onScroll);
+    onScroll();
     cleanups.push(() => {
       removeEventListener("scroll", onScroll);
-      track.removeEventListener("scroll", onScroll);
-      removeEventListener("resize", layout);
-      removeEventListener("load", layout);
-      imgs.forEach((im) => im.removeEventListener("load", layout));
-      work.style.height = "";
+      removeEventListener("resize", onScroll);
     });
 
     // cursor
