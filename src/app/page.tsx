@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import { ProjectDeck, type Project } from "@/components/ui/scroll-stacking-cards";
 import { ServicesHoverPreview, type Service } from "@/components/ui/services-hover-preview";
+import { SiteCursor, SiteFooter, SiteNav } from "@/components/site/site-chrome";
 import { HomeEffects } from "./home-effects";
 import "./home.css";
 
@@ -13,7 +14,6 @@ export const metadata: Metadata = {
   openGraph: { images: ["/share.jpg"] },
 };
 
-const MAIL = "mailto:mouad.ziroudi@gmail.com?subject=Project%20brief";
 const TOOLS = ["Figma", "WordPress", "WooCommerce", "React", "Next.js", "Python", "PyTorch", "Design systems"];
 const STATEMENT = "Same hands from the Figma file to the live site. Nothing gets lost in between.";
 
@@ -62,20 +62,7 @@ const v = (vars: Record<string, string | number>) => vars as CSSProperties;
 export default function Page() {
   return (
     <div className="v3">
-      <a className="skip" href="#main">Skip to content</a>
-
-      <header className="nav">
-        <a className="nav__logo" href="#top">Mouad Ziroudi<sup>©</sup></a>
-        <nav className="nav__links" aria-label="Main">
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#projects">Projects</a>
-          <a href="#about">About</a>
-          <a href="/blog">Journal</a>
-        </nav>
-        <span className="nav__time mono" data-clock>Casablanca</span>
-        <a className="nav__cta" href="#contact">Let’s talk</a>
-      </header>
+      <SiteNav home />
 
       <main id="main">
         {/* hero */}
@@ -268,26 +255,8 @@ export default function Page() {
         </section>
       </main>
 
-      {/* contact */}
-      <footer className="contact" id="contact" aria-labelledby="contact-h">
-        <div className="wrap sec">
-          <p className="mono" style={{ marginBottom: 28 }}>(05) Contact</p>
-          <h2 id="contact-h">Got a project?<br />Let’s talk.</h2>
-          <a className="mail" href={MAIL}>
-            mouad.ziroudi@gmail.com
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
-          </a>
-          <div className="foot">
-            <div><h4>Code</h4><a href="https://github.com/mziroudi">GitHub</a><a href="https://medium.com/@mouad.ziroudi/about">Medium</a></div>
-            <div><h4>Social</h4><a href="https://linkedin.com/in/mouad-ziroudi/">LinkedIn</a><a href="https://x.com/mouadziroudi">X</a></div>
-            <div><h4>Writing</h4><a href="/blog">Journal</a><p data-clock-plain>Casablanca</p></div>
-            <div><h4>© 2026</h4><p>Mouad Ziroudi. Client names and logos belong to their owners.</p></div>
-          </div>
-          <p className="bigword" aria-hidden="true">Ziroudi</p>
-        </div>
-      </footer>
-
-      <div className="cursor" aria-hidden="true"><span>Visit</span></div>
+      <SiteFooter />
+      <SiteCursor />
       <HomeEffects />
     </div>
   );

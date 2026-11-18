@@ -1,9 +1,9 @@
 import { getBlogPosts, getPost } from "@/data/blog";
 import { DATA } from "@/data/resume";
-import { formatDate } from "@/lib/utils";
+import { shortDate } from "@/components/site/site-chrome";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -65,7 +65,7 @@ export default async function Blog({
   }
 
   return (
-    <section id="blog">
+    <section id="blog" aria-label={post.metadata.title}>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -88,27 +88,22 @@ export default async function Blog({
           }),
         }}
       />
-      <div className="mx-auto max-w-[44rem]">
-        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          Journal · Entry
-        </p>
-        <h1 className="mt-6 font-display text-[clamp(2.25rem,6vw,4rem)] font-medium leading-[0.98] tracking-[-0.02em] text-foreground">
-          {post.metadata.title}
-        </h1>
-        <div className="mt-6 mb-12 flex items-center justify-between border-b border-border pb-6">
-          <Suspense fallback={<p className="h-5" />}>
-            <time className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              {formatDate(post.metadata.publishedAt)}
-            </time>
-          </Suspense>
-          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-            {DATA.name}
-          </span>
+      <header className="jhero jhero--post">
+        <div className="wrap jhero__in">
+          <div className="hero__meta mono">
+            <Link href="/blog">← Journal</Link>
+            <time dateTime={post.metadata.publishedAt}>{shortDate(post.metadata.publishedAt)}</time>
+            <span>{DATA.name}</span>
+          </div>
+          <h1 className="jhero__post">{post.metadata.title}</h1>
+          {post.metadata.summary ? <p className="jhero__lead">{post.metadata.summary}</p> : null}
         </div>
-        <article
-          className="prose prose-neutral max-w-none font-display text-[17px] leading-[1.7] dark:prose-invert prose-headings:font-display prose-headings:font-medium prose-headings:italic prose-headings:tracking-tight prose-p:font-display prose-p:leading-[1.7] prose-a:underline prose-a:decoration-foreground/40 prose-a:underline-offset-4 prose-a:text-foreground hover:prose-a:decoration-foreground"
-          dangerouslySetInnerHTML={{ __html: post.source }}
-        />
+      </header>
+      <div className="light">
+        <div className="wrap sec sec--tight">
+          <article className="prose prose-lg post-body" dangerouslySetInnerHTML={{ __html: post.source }} />
+          <p className="post-back"><Link href="/blog">← All entries</Link></p>
+        </div>
       </div>
     </section>
   );
