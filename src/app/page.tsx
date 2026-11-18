@@ -18,18 +18,17 @@ const TOOLS = ["Figma", "WordPress", "WooCommerce", "React", "Next.js", "Python"
 const STATEMENT = "Same hands from the Figma file to the live site. Nothing gets lost in between.";
 
 const SERVICES: Service[] = [
-  { n: "01", title: "Websites", text: "Designed in Figma and built in WordPress, so your team can update the site without calling me.", tags: ["Figma", "WordPress", "Responsive"], image: "/work/ch-primolegno-750.jpg", color: "#1c1712" },
-  { n: "02", title: "Online shops", text: "WooCommerce shops with catalogues, checkout and content in French and Arabic.", tags: ["WooCommerce", "Bilingual", "Catalogues"], image: "/work/ch-darnjara-750.jpg", color: "#f3f1ec" },
-  { n: "03", title: "Product design", text: "Research, flows, prototypes and design systems for web apps, handed over with specs or built in React.", tags: ["User research", "Design systems", "React"], image: "/work/ch-medicpro-750.jpg", color: "#eef1f3" },
+  { n: "01", title: "Websites", text: "Designed in Figma and built in WordPress, so your team can update the site without calling me.", tags: ["Figma", "WordPress", "Responsive"], image: "/work/site-primolegno-1200.jpg", color: "#1c1712" },
+  { n: "02", title: "Online shops", text: "WooCommerce shops with catalogues, checkout and content in French and Arabic.", tags: ["WooCommerce", "Bilingual", "Catalogues"], image: "/work/site-darnjara-1200.jpg", color: "#f3f1ec" },
+  { n: "03", title: "Product design", text: "Research, flows, prototypes and design systems for web apps, handed over with specs or built in React.", tags: ["User research", "Design systems", "React"], image: "/work/site-medicpro-1200.jpg", color: "#eef1f3" },
   { n: "04", title: "AI prototypes", text: "Working prototypes with models and retrieval, measured honestly before anyone ships them.", tags: ["Python", "PyTorch", "RAG"], image: "/work/pwave-480.jpg", color: "#ffffff" },
 ];
 
 const WORK = [
   { slug: "primolegno", accent: "#8a5a35", kind: "Showcase site", name: "Primolegno", year: "2024", url: "https://primolegno.ma/", w: 1200, h: 750, alt: "Primolegno collections page: a black lacquered door, an oak door and walnut wall panels", text: "A showcase for a luxury joinery brand: doors, wall panels and hotel projects, written for architects." },
   { slug: "medicpro", accent: "#7b2d8e", kind: "Accessible site", name: "MedicPro", year: "2024", url: "https://www.medicpro.ma/", w: 1200, h: 750, alt: "MedicPro page on upper-limb prosthetics with a photo of a smiling patient", text: "An accessible site for a prosthetics and orthotics provider, written for patients and their families." },
-  { slug: "artsclinic", accent: "#2e6b3f", kind: "Site and booking", name: "Art’s Clinic", year: "2023", url: "https://artsclinic.com/", w: 992, h: 620, alt: "Art’s Clinic home page with its side menu and appointment button", text: "Site and appointment booking for a dental and aesthetic medicine clinic in Casablanca." },
+  { slug: "artsclinic", accent: "#2e6b3f", kind: "Site and booking", name: "Art’s Clinic", year: "2023", url: "https://artsclinic.evermoredigital.ma/", w: 992, h: 620, alt: "Art’s Clinic home page with its side menu and appointment button", text: "Site and appointment booking for a dental and aesthetic medicine clinic in Casablanca." },
   { slug: "darnjara", accent: "#3f8f3a", kind: "WooCommerce shop", name: "Dar Njara", year: "2022", url: "https://darnjara.ma/", w: 1440, h: 900, alt: "Dar Njara shop with its door categories and a walk-in wardrobe", text: "A WooCommerce shop for doors, wardrobes and kitchens, in French and Arabic." },
-  { slug: "hssmaroc", accent: "#d6213a", kind: "Brand site and catalogue", name: "HSS Maroc", year: "2021", url: "https://hssmaroc.com/", w: 1152, h: 720, alt: "HSS Maroc home page with its premium appliances banner over a dark kitchen", text: "The brand site and catalogue of the Moroccan distributor of Franke kitchen appliances." },
   { slug: "touarga", accent: "#a87b00", kind: "Football club site", name: "Touarga Club", year: "2020", url: "https://touargaclub.ma/", w: 1440, h: 900, alt: "Touarga Club home page with the next fixture and the last result over a stadium", text: "A football club site with fixtures, results, news and the youth academy." },
 ];
 
@@ -38,7 +37,8 @@ const DECK: Project[] = WORK.map((c) => ({
   summary: c.text,
   url: c.url,
   display: c.year + " · " + c.kind,
-  image: `/work/ch-${c.slug}.jpg`,
+  image: `/work/site-${c.slug}.jpg`,
+  srcSet: `/work/site-${c.slug}-1200.jpg 1200w, /work/site-${c.slug}.jpg 2400w`,
   accent: c.accent,
 }));
 
@@ -152,7 +152,7 @@ export default function Page() {
         {/* work */}
         <section className="work" id="work" aria-labelledby="work-h">
           <div className="wrap work__head work__intro">
-            <h2 id="work-h">Client websites<sup>(06)</sup></h2>
+            <h2 id="work-h">Client websites<sup>(05)</sup></h2>
             <p className="mono">(02) Selected work, 2020 to now · scroll</p>
           </div>
           <ProjectDeck projects={DECK} />

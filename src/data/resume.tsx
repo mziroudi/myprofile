@@ -155,7 +155,7 @@ export const DATA = {
   projects: [
     {
       title: "Art's Clinic - Healthcare & Aesthetic Medicine Platform",
-      href: "https://artsclinic.com/",
+      href: "https://artsclinic.evermoredigital.ma/",
       dates: "2023",
       active: true,
       description: "Designed and developed a sophisticated healthcare platform for a leading aesthetic medicine clinic. The project focused on creating a trustworthy, professional digital presence that showcases medical services, builds patient confidence, and streamlines appointment booking for aesthetic treatments and consultations.",
@@ -169,7 +169,7 @@ export const DATA = {
       links: [
         {
           title: "Website",
-          href: "https://artsclinic.com/",
+          href: "https://artsclinic.evermoredigital.ma/",
           icon: Icons.globe
         }
       ],

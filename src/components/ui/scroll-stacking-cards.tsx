@@ -22,6 +22,8 @@ export type Project = {
   display?: string;
   /** A screenshot of the site, 16:10. */
   image: string;
+  /** Optional responsive sources for the screenshot. */
+  srcSet?: string;
   /** The arrow's colour, from the site's own brand. */
   accent: string;
 };
@@ -102,6 +104,10 @@ function Card({ p, i, count, progress, still, ground, ink, muted }: {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={p.image}
+          srcSet={p.srcSet}
+          sizes="(max-width: 640px) 100vw, min(1400px, 128svh)"
+          width={2400}
+          height={1500}
           alt={`The ${host(p.url)} homepage`}
           loading={i < 2 ? "eager" : "lazy"}
           decoding="async"
